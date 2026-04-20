@@ -20,10 +20,15 @@ import {
   Info,
   CheckCircle2,
   AlertCircle,
-  AlertTriangle
+  AlertTriangle,
+  Zap,
+  ArrowRight,
+  Shield,
+  Star
 } from 'lucide-react';
 
 const SECTIONS = [
+  { id: 'showcase', label: 'Showcase', icon: Layout },
   { id: 'colors', label: 'Colors', icon: Palette },
   { id: 'typography', label: 'Typography', icon: Type },
   { id: 'spacing', label: 'Spacing', icon: Ruler },
@@ -95,8 +100,143 @@ const SectionTitle = ({ title, icon: Icon }: { title: string; icon: any }) => (
   </div>
 );
 
+const ShowcaseSection = () => {
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
+  return (
+    <div className="space-y-16">
+      {/* Hero Showcase */}
+      <section className="bg-white rounded-[32px] p-12 lg:p-20 shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl -mr-32 -mt-32 opacity-50"></div>
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-50 rounded-full blur-3xl -ml-32 -mb-32 opacity-50"></div>
+        
+        <div className="relative z-10 max-w-2xl">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-semibold mb-6"
+          >
+            <Zap size={16} />
+            Built with DS System v1.2
+          </motion.div>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-8"
+          >
+             Designing the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">future</span> of web apps.
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-xl text-slate-500 mb-10 leading-relaxed"
+          >
+            This showcase demonstrates how our color palette, typography scale, 
+            and spacing system work together to create professional interfaces.
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="flex gap-4"
+          >
+            <button className="bg-blue-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-200 flex items-center gap-2">
+              Get Started <ArrowRight size={20} />
+            </button>
+            <button className="bg-white text-slate-900 border border-slate-200 px-8 py-4 rounded-2xl font-bold hover:bg-slate-50 transition-all active:scale-95">
+              Documentation
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Feature Grid Showcase */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[
+          { icon: Shield, title: "Secure Defaults", desc: "Enterprise-grade security tokens built into every component by default.", color: "bg-blue-500" },
+          { icon: Star, title: "Premium Feel", desc: "Using our specific border radius and shadow tokens for a polished look.", color: "bg-purple-500" },
+          { icon: Layout, title: "Modular Grid", desc: "A robust spacing scale ensures perfect alignment across all viewports.", color: "bg-teal-500" },
+        ].map((feature, i) => (
+          <motion.div
+            key={feature.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 + (i * 0.1) }}
+            className="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow group"
+          >
+            <div className={`w-12 h-12 ${feature.color} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:rotate-6 transition-transform`}>
+              <feature.icon size={24} />
+            </div>
+            <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+            <p className="text-slate-500 leading-relaxed">{feature.desc}</p>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Semantic Card Showcase */}
+      <section className="space-y-8">
+        <h3 className="text-2xl font-bold px-2">Component Examples</h3>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+            <div className="bg-slate-50 p-6 border-b border-slate-200">
+               <h4 className="font-bold flex items-center gap-2 text-slate-700">
+                 <AlertCircle size={18} className="text-blue-500" /> System Notification
+               </h4>
+            </div>
+            <div className="p-8 flex items-start gap-6">
+              <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center shrink-0">
+                <CheckCircle2 size={24} />
+              </div>
+              <div className="space-y-4">
+                <p className="text-lg font-semibold text-slate-900">Application deployed successfully!</p>
+                <p className="text-slate-500">Your design system review site is now live at the specified URL. All tokens are synced.</p>
+                <div className="pt-2">
+                   <button className="text-blue-600 font-bold hover:underline">View Live Site</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-900 text-white rounded-3xl p-10 flex flex-col justify-center relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-8 opacity-10">
+              <Zap size={120} />
+            </div>
+            <h4 className="text-3xl font-black mb-6">Dark Mode Tokens</h4>
+            <p className="text-slate-400 text-lg leading-relaxed mb-8">
+              Our design system explicitly defines semantic colors for high-contrast dark environments.
+            </p>
+            <div className="flex gap-4">
+              <div className="px-4 py-2 bg-slate-800 rounded-lg text-sm font-mono border border-slate-700">Slate-800</div>
+              <div className="px-4 py-2 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-bold border border-blue-400/30">Action-Primary</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-blue-600 rounded-[32px] p-12 text-center text-white shadow-2xl shadow-blue-200 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 opacity-50"></div>
+        <div className="relative z-10">
+          <h2 className="text-4xl font-bold mb-6">Ready to start building?</h2>
+          <p className="text-blue-100 text-lg mb-10 max-w-xl mx-auto">
+            Join 2,000+ developers using our design system to create incredible web experiences.
+          </p>
+          <button className="bg-white text-blue-600 px-10 py-4 rounded-2xl font-bold hover:bg-blue-50 transition-all hover:scale-105 active:scale-95 shadow-xl">
+            Get Documentation
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+};
+
 export default function App() {
-  const [activeSection, setActiveSection] = useState('colors');
+  const [activeSection, setActiveSection] = useState('showcase');
 
   const containerVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -116,7 +256,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 pb-20 md:pb-0">
       {/* Sidebar Navigation */}
       <aside className="fixed left-0 top-0 bottom-0 w-64 bg-white border-r border-slate-200 p-6 flex flex-col gap-8 hidden md:flex z-50">
         <div className="flex items-center gap-3 px-2">
@@ -162,6 +302,8 @@ export default function App() {
             exit={{ opacity: 0, transition: { duration: 0.2 } }}
             variants={containerVariants}
           >
+            {activeSection === 'showcase' && <ShowcaseSection />}
+
             {activeSection === 'colors' && (
               <section id="colors">
                 <SectionTitle title="Color Palette" icon={Palette} />
