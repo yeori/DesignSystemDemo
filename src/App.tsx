@@ -31,10 +31,10 @@ export default function App() {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: '8px 12px',
-    borderRadius: theme.radius.base,
+    borderRadius: theme.global.radius.sm,
     transition: 'all 0.2s',
-    backgroundColor: isActive ? theme.colors.primary['50'] : 'transparent',
-    color: isActive ? theme.colors.primary['700'] : theme.colors.neutrals['500'],
+    backgroundColor: isActive ? theme.alias.color.action.primaryGhost : 'transparent',
+    color: isActive ? theme.alias.color.action.primary : theme.alias.color.text.caption,
     cursor: 'pointer',
     width: '100%',
     textAlign: 'left' as const
